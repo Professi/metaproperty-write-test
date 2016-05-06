@@ -7,19 +7,19 @@
 #include <QSharedPointer>
 #include "models.h"
 
-void setListProperty(const QSharedPointer<Entity> &entity, QList<QSharedPointer<Entity>> &list, const QMetaProperty &property)  {
+void setListProperty(const QSharedPointer<Entity> &entity,
+                     QList<QSharedPointer<Entity>> &list, const QMetaProperty &property)  {
     QVariant var;
     var.setValue<QList<QSharedPointer<Entity>>>(list);
     qDebug() << "Write" << property.write(entity.data(), var);
 }
 
 int main() {
-    QSharedPointer<Person> p = QSharedPointer<Person>(new Person());
+    QSharedPointer<Entity> p = QSharedPointer<Entity>(new Person());
     const QMetaObject *mo = p->metaObject();
-    QMetaProperty prop = mo->property(2);
+    QMetaProperty prop = mo->property(1);
     QList<QSharedPointer<Entity>> list;
     list.append(p);
-    QSharedPointer<Entity> e = list.at(0);
-    setListProperty(e, list, prop);
+    setListProperty(p, list, prop);
     return 0;
 }
