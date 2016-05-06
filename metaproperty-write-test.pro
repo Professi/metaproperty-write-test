@@ -8,6 +8,8 @@ QT       += testlib
 
 QT       -= gui
 
+CONFIG += c++11
+
 TARGET = tst_metapropertywritetest
 CONFIG   += console
 CONFIG   -= app_bundle
