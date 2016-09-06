@@ -15,8 +15,33 @@ class Person : public Entity {
   public:
     Person() : Entity() { }
     Q_PROPERTY(QList<QSharedPointer<Person>> p READ getP WRITE setP)
-  private:
+    Q_PROPERTY(QSharedPointer<Person> sp READ getSp WRITE setSp)
+    Q_PROPERTY(Person* spAgain READ getSpAgain WRITE setSpAgain)
+    QSharedPointer<Person> getSp() const
+    {
+    return this->sp;
+    }
+
+    void setSp(const QSharedPointer<Person> &value)
+    {
+    this->sp = value;
+    }
+
+    Person *getSpAgain() const
+    {
+    return spAgain;
+    }
+
+    void setSpAgain(Person *value)
+    {
+    spAgain = value;
+    }
+
+
+private:
     QList<QSharedPointer<Person>> p;
+    QSharedPointer<Person> sp;
+    Person *spAgain;
     QList<QSharedPointer<Person>> getP() const {
         return p;
     }

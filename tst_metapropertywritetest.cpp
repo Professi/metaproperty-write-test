@@ -19,6 +19,8 @@ class MetapropertyWriteTest : public QObject {
 
   private Q_SLOTS:
     void testCase1();
+    void testCase2();
+    void testCase3();
 };
 
 MetapropertyWriteTest::MetapropertyWriteTest() {
@@ -31,6 +33,25 @@ void MetapropertyWriteTest::testCase1() {
     QList<QSharedPointer<Entity>> list;
     list.append(p);
     setListProperty(p, list, prop);
+}
+
+void MetapropertyWriteTest::testCase2() {
+    QSharedPointer<Entity> p = QSharedPointer<Entity>(new Person());
+    const QMetaObject *mo = p->metaObject();
+    QMetaProperty prop = mo->property(2);
+    QVariant var;
+    var.setValue<QSharedPointer<Entity>>(p);
+    QVERIFY(prop.write(p.data(), var));
+}
+
+void MetapropertyWriteTest::testCase3()
+{
+    Entity *p = new Person();
+    const QMetaObject *mo = p->metaObject();
+    QMetaProperty prop = mo->property(3);
+    QVariant var;
+    var.setValue<Entity*>(p);
+    QVERIFY(prop.write(p, var));
 }
 
 
